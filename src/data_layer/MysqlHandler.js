@@ -7,7 +7,7 @@ class MysqlHandler {
         this.connection = mysql.createConnection({
             host     : 'localhost',
             user     : 'root',
-            password : '*****' //Configure db password here.
+            password : global.CONFIG.getDBPassword()
         });
     }
 

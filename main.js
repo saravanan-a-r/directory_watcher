@@ -5,7 +5,7 @@ const port = 8000;
 const { request } = require('http');
 const { response } = require('express');
 
-const CONFIG = require("./Config");
+global.CONFIG = require("./Config");
 
 const MagicCount = require('./src/utils/MagicCount');
 const DirWatcher = require('./services/DirWatcher');

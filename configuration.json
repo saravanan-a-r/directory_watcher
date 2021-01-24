@@ -3,5 +3,6 @@
     "schedule_directory" : "cirectory saravanan",
     "thread_count" : 3,
     "application_logpath" : "./logs/application.log",
-    "access_logpath" : "./logs/access.log"
+    "access_logpath" : "./logs/access.log",
+    "db_password" : ""
 }

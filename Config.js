@@ -114,6 +114,18 @@ class Config {
 
         return null;
     }
+
+    getDBPassword() {
+
+        try {
+            if(this._config != null) {
+                return this._config.db_password;
+            }
+        }
+        catch(e) {
+            application.severe(`Exception occurred in Config.getDBPassword() :: ${e}`);
+        }
+    }
 }
 
 module.exports = new Config("./configuration.json");
