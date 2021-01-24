@@ -1,0 +1,11 @@
+{
+    "api/v1/job/delete" : {
+        "query_params" : {
+            "ids" : {
+                "regex" : "^[0-9]+$",
+                "is_mandatory" : false,
+                "type" : "array"
+            }
+        }
+    }
+}

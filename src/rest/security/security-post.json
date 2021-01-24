@@ -1,0 +1,21 @@
+[{
+    "api/v1/job/create" : {
+        "query_params" : {
+            "cron_pattern" : {
+                "regex" : "*",
+                "is_mandatory" : false,
+                "type" : "string"
+            },
+            "magic_string" : {
+                "regex" : "*",
+                "is_mandatory" : false,
+                "type" : "string"
+            },
+            "directory" : {
+                "regex" : "*",
+                "is_mandatory" : false,
+                "type" : "string"
+            }
+        }
+    }
+}]

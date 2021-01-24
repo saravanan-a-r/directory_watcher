@@ -1,0 +1,21 @@
+[{
+    "api/v1/job/info" : {
+        "query_params" : {
+            "id" : {
+                "regex" : "^[0-9]+$",
+                "is_mandatory" : false,
+                "type" : "string"
+            },
+            "offset" : {
+                "regex" : "^[0-9]+$",
+                "is_mandatory" : false,
+                "type" : "integer"
+            },
+            "limit" : {
+                "regex" : "^[0-9]+$",
+                "is_mandatory" : false,
+                "type" : "integer"
+            }
+        }
+    }
+}]

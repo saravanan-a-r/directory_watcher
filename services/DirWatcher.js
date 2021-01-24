@@ -1,3 +1,7 @@
+const redis = require("redis");
+global.client = redis.createClient();
+
+const fs = require("fs");
 
 module.exports = class DirWatcher {
 
@@ -8,6 +12,7 @@ module.exports = class DirWatcher {
     startService() {
 
         this._initializeDatabase();
+        this._urlPattern();
     }
 
     _initializeDatabase() {
@@ -53,5 +58,22 @@ module.exports = class DirWatcher {
                 throw e;
             }
         });
+    }
+
+    _urlPattern() {
+        
+        let redisClient = global.client;
+
+        redisClient.on("error", (error) => {
+            console.log(`FATAL ERROR. CAN'T INITIALIZE URL PATTERN :: ${error}`);
+        });
+        
+        let deleteJson = fs.readFileSync(__dirname + "/../src/rest/security/security-delete.json");
+        let getJson = fs.readFileSync(__dirname + "/../src/rest/security/security-get.json");
+        let postJson = fs.readFileSync(__dirname + "/../src/rest/security/security-post.json");
+
+        redisClient.set("DELETE", deleteJson);
+        redisClient.set("GET", getJson);
+        redisClient.set("POST", postJson);
     }
 }
