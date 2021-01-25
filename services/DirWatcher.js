@@ -38,6 +38,15 @@ module.exports = class DirWatcher {
                 `);
 
                 await handler.executeQuery(`
+                    ALTER TABLE task PARTITION BY RANGE (ID) (
+                        PARTITION p0 VALUES LESS THAN (1000000),
+                        PARTITION p1 VALUES LESS THAN (2000000),
+                        PARTITION p2 VALUES LESS THAN (3000000),
+                        PARTITION p3 VALUES LESS THAN MAXVALUE
+                    );
+                `);
+
+                await handler.executeQuery(`
                     create table if not exists task_occurance(
                         ID bigint not null,
                         start_time bigint not null,
@@ -49,6 +58,33 @@ module.exports = class DirWatcher {
                         cron_pattern varchar(1000),
                         primary key(ID)
                     )
+                `);
+
+                await handler.executeQuery(`
+                    ALTER TABLE task_occurance PARTITION BY RANGE (ID) (
+                        PARTITION p0 VALUES LESS THAN (1000000),
+                        PARTITION p1 VALUES LESS THAN (2000000),
+                        PARTITION p2 VALUES LESS THAN (3000000),
+                        PARTITION p3 VALUES LESS THAN MAXVALUE
+                    );
+                `);
+
+                await handler.executeQuery(`
+                    create table if not exists directory_content(
+                        ID bigint not null,
+                        directory varchar(1000) not null,
+                        file_list varchar(9000),
+                        primary key(ID)
+                    )
+                `);
+
+                await handler.executeQuery(`
+                    ALTER TABLE directory_content PARTITION BY RANGE (ID) (
+                        PARTITION p0 VALUES LESS THAN (1000000),
+                        PARTITION p1 VALUES LESS THAN (2000000),
+                        PARTITION p2 VALUES LESS THAN (3000000),
+                        PARTITION p3 VALUES LESS THAN MAXVALUE
+                    );
                 `);
 
                 resolve();
