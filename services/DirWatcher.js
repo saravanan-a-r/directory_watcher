@@ -33,6 +33,7 @@ module.exports = class DirWatcher {
                         cron_pattern varchar(1000) not null,
                         magic_string varchar(1000) not null,
                         directory varchar(1000) not null,
+                        status boolean,
                         primary key(ID)
                     )
                 `);
