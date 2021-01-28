@@ -11,6 +11,16 @@ const MagicCount = require('./src/utils/MagicCount');
 const DirWatcher = require('./services/DirWatcher');
 const access = require("./src/utils/logger").access;
 
+const rateLimit = require("express-rate-limit");
+ 
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
+ 
+//  apply to all requests
+app.use(limiter);
+
 app.use(function (request, response, next) {
   access.info(request.originalUrl);
   if(!security.securityFilter(request)) {
@@ -28,7 +38,7 @@ app.listen(port, () => {
 
 function initializeService() {
 
-   new DirWatcher().startService();
+  new DirWatcher().startService();
 }
 
 require('./src/rest/routes/schedulerAction')(app);
